@@ -1,19 +1,11 @@
 <?php
 session_start();
-include '../config/dbconfig.php';
-include '../debug.php';
-$connection = getConnection();
+include '../includes/check-auth.php';
+include '../database/Database.php';
 
-$result = $connection->query('select * from class order by created_at desc');
-$html = '';
-while ($row = $result->fetch_assoc()) {
-    $formattedDate = (new DateTime($row['date']))->format('Y-m-d');
-    $html .= "<div class='class-row'>";
-    $html .= "<h3>{$row['title']}</h3>";
-    $html .= "<div>{$row['content']}</div>";
-    $html .= "<p>$formattedDate</p>";
-    $html .= "</div>";
-}
+$db = new Database();
+$html = $db->getClassesOrderedByDate();
+
 ?>
 
 <!DOCTYPE html>

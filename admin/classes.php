@@ -1,7 +1,8 @@
 <?php
 session_start();
-include '../config/dbconfig.php';
-$connection = getConnection();
+include '../database/Database.php';
+$db = new Database();
+$connection = $db->getConnection();
 
 if (!empty($_POST['title']) && !empty($_POST['content']) && !empty($_POST['date'])) {
     $statement = $connection->prepare("INSERT INTO class VALUES (DEFAULT, ?, ?, DEFAULT, ?)");
