@@ -1,13 +1,14 @@
 <?php
 session_start();
 
+$message = '';
 if (isset($_SESSION['error_message'])) {
-    echo $_SESSION['error_message'];
+    $message = $_SESSION['error_message'];
     unset($_SESSION['error_message']);
 }
 
 if (isset($_SESSION['success'])) {
-    echo $_SESSION['success'];
+    $message = "<div class='flash-message''>{$_SESSION['success']}</div>";
     unset($_SESSION['success']);
 }
 ?>
@@ -20,6 +21,7 @@ if (isset($_SESSION['success'])) {
 <header>
     <?php include '../includes/nav.php' ?>
 </header>
+    <?php echo $message?>
 <main>
     <?php include '../includes/login_form.php' ?>
 </main>

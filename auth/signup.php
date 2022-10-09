@@ -8,8 +8,8 @@ $db = new Database();
 if (!empty($_POST['username']) && isset($_POST['password']) && isset($_POST['email'])) {
     $statement = $db->registerUser($_POST['username'], $_POST['password'], $_POST['email']);
     if ($statement->affected_rows === 1) {
-        $_SESSION['success'] = "success. youre now registered";
-        header('Location: index.php');
+        $_SESSION['success'] = "Success. Youre now registered";
+        header('Location: /code-school-php/auth/login.php');
         exit();
     } else {
         echo "error registering";

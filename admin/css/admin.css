@@ -17,6 +17,10 @@ nav {
     padding: 20px;
 }
 
+li {
+    list-style: none;
+}
+
 nav div {
     flex-grow: 1
 }
@@ -24,7 +28,6 @@ nav div {
 nav a {
     text-decoration: none;
     color: white;
-    margin-left: 8px;
 }
 
 main {

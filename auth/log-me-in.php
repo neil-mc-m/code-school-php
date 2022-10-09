@@ -12,7 +12,7 @@ if (!empty($_POST['loggedInName']) && isset($_POST['password'])) {
         $userData = $mysqlResult->fetch_assoc();
         if (password_verify($_POST['password'], $userData['password'])) {
             $userObject = new User($userData);
-            $_SESSION['user'] = $userObject->getId();
+            $_SESSION['userId'] = $userObject->getId();
             if ($userObject->isUserAdmin()) {
                 header('Location: /code-school-php/admin/dashboard.php');
                 exit();

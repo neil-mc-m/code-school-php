@@ -11,7 +11,7 @@ class User
     public function __construct(array $userData){
         $this->id = $userData['id'];
         $this->userName = $userData['username'];
-        $this->createdAt = $userData['create_at'];
+        $this->createdAt = $userData['created_at'];
         $this->email = $userData['email'];
         $this->role = $userData['role'];
     }
