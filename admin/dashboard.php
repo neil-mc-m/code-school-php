@@ -18,8 +18,6 @@ while ($row = $classes->fetch_assoc()) {
         $html .= "<div>{$row['content']}</div>";
         $html .= "<p>$formattedDate</p>";
         $html .= "</div>";
-
-
     } else {
         $html .= "<div class='class-row'>";
         $html .= "<h3>{$row['title']}</h3>";
