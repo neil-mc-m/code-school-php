@@ -1,5 +1,7 @@
 <?php
 
+include_once __DIR__ . '../../User.php';
+
 class Database
 {
     private mysqli|false $connection;
@@ -30,22 +32,9 @@ class Database
         return $statement->get_result();
     }
 
-    public function getClassesOrderedByDate(): string
+    public function getClassesOrderedByDate(): mysqli_result|bool
     {
-        $result = $this->getConnection()->query('select * from class order by created_at desc');
-
-        $html = '';
-
-        while ($row = $result->fetch_assoc()) {
-            $formattedDate = (new DateTime($row['date']))->format('Y-m-d');
-            $html .= "<div class='class-row'>";
-            $html .= "<h3>{$row['title']}</h3>";
-            $html .= "<div>{$row['content']}</div>";
-            $html .= "<p>$formattedDate</p>";
-            $html .= "</div>";
-        }
-
-        return $html;
+        return $this->getConnection()->query('select * from class order by date desc');
     }
 
     public function registerUser($userName, $password, $email): bool|mysqli_stmt
@@ -58,5 +47,73 @@ class Database
         $statement->execute();
 
         return $statement;
+    }
+
+    public function loadUserFromSession(mixed $userId)
+    {
+        $statement = $this->getConnection()->prepare('SELECT * FROM users WHERE id = ?');
+
+        $statement->bind_param('i', $userId);
+
+        $statement->execute();
+
+        return $this->asUser($statement->get_result());
+    }
+
+    public function asArray($mysqlResult): array
+    {
+        $dataRow = [];
+        if ($mysqlResult->num_rows > 0) {
+            while ($row = $mysqlResult->fetch_assoc()) {
+                $dataRow[] = $row;
+            }
+        }
+
+        return $dataRow;
+    }
+
+    public function asUser($mysqlResult): User|false
+    {
+        if ($mysqlResult->num_rows > 0) {
+            $dataRow = $mysqlResult->fetch_assoc();
+            return new User($dataRow);
+        }
+
+        return false;
+    }
+
+    public function createBooking(mixed $data):bool|mysqli_stmt
+    {
+        $statement = $this->getConnection()->prepare("INSERT INTO booking VALUES (DEFAULT, ?, ?, DEFAULT)");
+
+        $classId = (int)$data['class_id'];
+        $userId = (int)$data['user_id'];
+        $statement->bind_param('ss', $classId, $userId);
+
+        $statement->execute();
+
+        return $statement;
+    }
+
+    public function loadBookings(): array
+    {
+        $statement = $this->getConnection()->prepare('SELECT * FROM booking;');
+
+        $statement->execute();
+
+        return $this->asArray($statement->get_result());
+    }
+
+    public function getClassById($classId)
+    {
+        $statement = $this->getConnection()->prepare('SELECT * FROM class WHERE id = ?;');
+        $statement->bind_param('i', $classId);
+        $statement->execute();
+        $mysqlResult = $statement->get_result();
+        if ($mysqlResult->num_rows > 0) {
+            return $mysqlResult->fetch_assoc();
+        }
+
+        return [];
     }
 }

@@ -1,7 +1,5 @@
 <?php
 
-include __DIR__ . '/../User.php';
-
 $links = [
     '/code-school-php/' => 'Home'
 ];
@@ -18,7 +16,7 @@ $links = [
             $navHtml .= "<li><a href='{$key}'>{$value}</a></li>";
         }
 
-        if (isset($_SESSION['user'])) {
+        if (isset($_SESSION['userId'])) {
             $navHtml .= "<li><a href='/code-school-php/auth/logout.php'>Logout</a></li>";
         } else {
             $navHtml .= "<li><a href='/code-school-php/auth/signup.php'>Signup</a></li>";

@@ -89,3 +89,14 @@ main {
 .site-logo {
     color: white;
 }
+
+.booking-message {
+    background-color: lightgreen;
+    padding: 10px;
+    display: none;
+}
+
+.flash-message {
+    background-color: lightgreen;
+    padding: 10px;
+}

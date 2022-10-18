@@ -1,6 +1,9 @@
 <?php
 session_start();
 include '../database/Database.php';
+include_once '../User.php';
+include '../includes/check-auth.php';
+
 $db = new Database();
 $connection = $db->getConnection();
 
@@ -20,7 +23,7 @@ if (!empty($_POST['title']) && !empty($_POST['content']) && !empty($_POST['date'
 <!DOCTYPE html>
 <html lang="en">
 <body>
-<link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="css/admin.css">
 <?php include './includes/admin_nav.php';?>
 <main>
     <form action="" method="post" id="createClassForm">
