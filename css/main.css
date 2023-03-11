@@ -1,102 +1,69 @@
 * {
     box-sizing: border-box;
-    font-family: sans-serif;
+    font-family: Arial, Serif, serif;
+    padding: 0;
+    margin: 0;
 }
 
-html,
-body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
+li {
+    list-style-type: none;
+}
+
+a {
+    color: black;
+    text-decoration: none;
 }
 
 nav {
-    display: flex;
-    justify-content: space-between;
-    background: #1A5276;
+    padding: 10px;
+    margin: unset;
+    background: #D5F5E3;
+}
+
+blockquote {
+    font-style: italic;
+    font-size: 8px;
+    font-weight: 200;
+}
+.wrapper {
     padding: 20px;
 }
 
-nav li {
-    list-style: none;
+.navbar {
+    display: flex;
+    gap: 10px;
+    padding: unset;
 }
 
-nav a {
-    text-decoration: none;
-    color: white;
-    margin-left: 8px;
+.nav-logo {
+    margin-right: auto;
 }
 
-main {
-    margin: 30px;
-}
-
-#loginForm {
-    border: 1px solid #ECE6E6;
+.container-centered {
     display: flex;
     justify-content: center;
-    flex-direction: column;
-    width: 50%;
-    margin: 20px auto
 }
 
-#signupForm {
-    border: 1px solid #ECE6E6;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    width: 50%;
-    margin: 20px auto
-}
-
-#signupForm h4 {
+.content-centered {
     text-align: center;
 }
 
+.txt-light {
+    color: lightgray;
+}
 
-#loginForm h4 {
+.txt-centered {
     text-align: center;
 }
 
-.form-input {
-    display: flex;
-    flex-direction: column;
-    margin: 30px;
+.mt-3 {
+    margin-top: 3em;
 }
 
-.form-input input {
-    height: 40px;
+.link-main {
+    color: #7689D7;
 }
 
-.form-input label {
-    margin-bottom: 5px;
-}
-
-.form-input input,textarea {
-    border: 1px solid #ECE6E6;
-    border-radius: 4px;
-    padding: 10px;
-}
-
-.class-row {
-    padding: 10px;
-}
-
-.class-row:nth-child(even) {
-    background-color: #F5F9EF;
-}
-
-.site-logo {
-    color: white;
-}
-
-.booking-message {
-    background-color: lightgreen;
-    padding: 10px;
-    display: none;
-}
-
-.flash-message {
-    background-color: lightgreen;
-    padding: 10px;
+#login-error {
+    color: red;
 }
